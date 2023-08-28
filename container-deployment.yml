@@ -1,0 +1,19 @@
+---
+ - hosts: all
+   become: true
+   tasks: 
+
+     name: changing to the working directory
+     shell: cd  /opt/docker
+
+     name: building the docker image
+     shell: sudo docker build -t velaxy22 .
+
+     name: tagging the image to docker hub repository
+     shell: sudo docker tag velaxy22  chipax1994/velaxy22
+
+     name: pushing the image to docker hub repository
+     shell: sudo docker push  chipax1994/velaxy22:latest
+ 
+     name: creating a docker container from the image on docker hub
+     shell: docker run -d --name  velaxy222 -p 8090:8080 chipax1994/velaxy22:latest
